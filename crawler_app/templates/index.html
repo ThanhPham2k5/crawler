@@ -1,28 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Smart Crawler - Auto Date Detection</title>
-</head>
-<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #f4f7f6;">
-    <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <h2 style="color: #2c3e50;">🚀 Smart Crawler</h2>
-        <p>Nhập URL (ví dụ: giavang.org/.../2009-07-22.html)</p>
-        
-        <form action="/" method="POST">
-            <label>Đường dẫn URL:</label><br>
-            <input type="text" name="url" style="width: 100%; padding: 10px; margin: 10px 0;" placeholder="https://..." required><br>
+  </head>
+  <body
+    style="
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f7f6;
+    "
+  >
+    <div
+      style="
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      "
+    >
+      <h2 style="color: #2c3e50">🚀 Smart Crawler</h2>
+      <p>Nhập URL (ví dụ: giavang.org/.../2009-07-22.html)</p>
 
-            <label>Kiểu Parser:</label>
-            <select name="format" style="padding: 5px;">
-                <option value="lxml">LXML (Nhanh/Chuẩn)</option>
-                <option value="html.parser">HTML5</option>
-            </select><br><br>
+      <form action="/" method="POST">
+        <label for="url">Đường dẫn URL:</label><br />
+        <input
+          type="text"
+          name="url"
+          id="url"
+          style="
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+          "
+          placeholder="https://..."
+          required
+        /><br />
 
-            <button type="submit" style="width: 100%; padding: 12px; background: #27ae60; color: white; border: none; cursor: pointer; border-radius: 5px;">
-                Bắt đầu cào & Xuất CSV
-            </button>
-        </form>
+        {% if error %}
+        <div style="color: red">{{ error }}</div>
+        <br />
+        {% endif %}
+
+        <label for="days_amount">Số ngày (nếu có):</label><br />
+        <input
+          type="number"
+          name="days_amount"
+          id="days_amount"
+          style="
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+          "
+          placeholder="1 - 365"
+          min="1"
+          max="365"
+        /><br />
+
+        <label for="format">Kiểu Parser:</label>
+        <select id="format" name="format" style="padding: 5px">
+          <option value="lxml">LXML (Nhanh/Chuẩn)</option>
+          <option value="html5lib">HTML5</option></select
+        ><br /><br />
+
+        <button
+          type="submit"
+          style="
+            width: 100%;
+            padding: 12px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+          "
+        >
+          Bắt đầu cào & Xuất CSV
+        </button>
+      </form>
     </div>
-</body>
+  </body>
 </html>

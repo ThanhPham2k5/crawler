@@ -11,4 +11,3 @@ install:
 
 clean:
 	rm -rf $(OUT_DIR)/*.csv
-	find . -type d -name "__pycache__" -exec rm -rf {} +
