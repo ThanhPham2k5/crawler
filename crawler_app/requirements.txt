@@ -1,6 +1,7 @@
-Flask
+flask
 requests
 beautifulsoup4
 pandas
 lxml
 html5lib
+gunicorn

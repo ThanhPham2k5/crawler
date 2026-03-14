@@ -6,6 +6,7 @@ import pandas as pd
 from io import StringIO
 from threading import Thread
 from flask import Flask, request, render_template, make_response
+import os
 
 def crawl(url, parser, results):
     try:
@@ -72,4 +73,6 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # deploy tạo port
+    port = int(os.environ.get('PORT', 5000)) # default port
+    app.run(host='0.0.0.0', port=port, debug=False)
