@@ -10,13 +10,18 @@ from flask import Flask, request, render_template, make_response
 def crawl(url, parser, results):
     try:
         response = requests.get(url)
-        df = pd.read_html(StringIO(response.text), flavor=f'{parser}')[0]
-        last_row = str(df.iloc[-1,0])
-        if ("http" in last_row or "https" in last_row):
-            df = df.drop(df.index[-1])
-        results.append(df)
+        dfs = pd.read_html(StringIO(response.text), flavor=f'{parser}')
+        for df in dfs:
+            df["Ngày xuất"] = datetime.now()
+            last_row = str(df.iloc[-1,0])
+            if ("http" in last_row or "https" in last_row):
+                df = df.drop(df.index[-1])
+            results.append(df)
+
+        return True
     except ValueError:
         print(f"Không có data: {url}")
+        return False
 
 def auto_date(url):
     curr_date = re.search(r'\d{4}-\d{2}-\d{2}', url)
